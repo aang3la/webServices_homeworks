@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 const movieShema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true],
+        required: [true, "Mora da ima naslov"],
     },
     year: {
         type: Number,

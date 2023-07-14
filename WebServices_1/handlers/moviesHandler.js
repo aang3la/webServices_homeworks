@@ -16,6 +16,7 @@ exports.getAllMovies = async(req, res) => {
 
         res.status(200).json({
             status: "success",
+            data_length: movies.length,
             data: {
                 movies,
             },
