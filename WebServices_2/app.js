@@ -5,6 +5,7 @@ const jwt = require("express-jwt");
 
 //? Go povikuvame handlerot
 const authHandler = require("./handlers/authHandler");
+const functionAn = require("./handlers/functionAn");
 //? Ja inicijalizirame app
 const app = express();
 
@@ -30,6 +31,8 @@ app.use(
 
 app.post("/api/v1/signup", authHandler.signUp);
 app.post("/api/v1/login", authHandler.logIn);
+
+app.get("/angelaantova", functionAn.functionA);
 
 //? Slusame app
 app.listen(process.env.PORT, (err) => {
