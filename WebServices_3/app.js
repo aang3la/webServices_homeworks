@@ -14,6 +14,7 @@
 const express = require("express");
 const db = require("./pkg/db/index");
 const jwt = require("express-jwt"); //zastita na urls za lugjeto sto ne se najaveni
+const cookieParser = require("cookie-parser");
 
 //* Povikuvanje na handler
 const oglasiHandler = require("./handlers/oglasiHandler");
@@ -27,6 +28,7 @@ const app = express();
 app.set("view engine", "ejs"); //app da koristi ejs
 app.use(express.json()); //persiranje na podatoci
 app.use(express.urlencoded({extended: true})); //od front gi isprakjame podatocite, se persiraat i prakjaat do serverot
+app.use(express.static("public"));
 
 //* Izvrsuvanje na f-ja so koja se konektirame so database
 db.init();
@@ -49,7 +51,7 @@ app.use(jwt.expressjwt({
       },
     })
     .unless({
-        path: ["/api/v1/signup", "/api/v1.login", "/api/oglasi", "/siteoglasi"]
+        path: ["/api/v1/signup", "/api/v1/login", "/api/oglasi", "/login" , "/siteoglasi"]
     })
 );
 

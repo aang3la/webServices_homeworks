@@ -9,6 +9,7 @@ const login = async (email, password) => {
                 password,
             }
         })
+        window.location.href = "/viewOglasi";
     }
     catch(err) {
         console.log(err);
