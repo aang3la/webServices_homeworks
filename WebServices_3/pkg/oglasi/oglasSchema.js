@@ -5,7 +5,7 @@ const oglasSchema = new mongoose.Schema({
     category: {
         type: String,
         enum: ["avtomobili", "velosipedi", "nedviznini", "telefoni"],
-        required: [true, "The category of the product is required,"],
+        required: [true, "The category of the product is required."],
     },
     title: {
         type: String,
@@ -19,6 +19,10 @@ const oglasSchema = new mongoose.Schema({
         type: Number,
         required: [true, "You must enter the price of the product."]
     },
+    author: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+    }
 });
 
 //* Baza na shemata sto ja definirame

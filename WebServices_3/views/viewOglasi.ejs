@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGLASI</title>
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+
+    <style>
+        .cena {
+            color: rgb(243, 64, 64);
+        }
+
+        .oglas {
+            background-color: rgb(182, 209, 248);
+            border: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1><%= naslov %></h1>
+    <p><%= text %></p> <br>
+
+    <form action="/kreirajoglas" method="POST">
+        <label for="title">Naslov:</label>
+        <input type="text" id="title" name="title"/>
+
+        <label for="description">Opis:</label>
+        <input type="text" id="description" name="description"/>
+
+        <label for="price">Cena:</label>
+        <input type="number" id="price" name="price"/>
+
+        <button class="btn" type="submit" name="nov-oglas">Vnesi nov oglas</button>
+    </form>
+
+    <% if(oglasi.length === 0) { %>
+        <p>Ne se pronajdeni oglasi.</p>
+    <% } else{ %>
+        <% oglasi.forEach(oglas => { %>
+            <div class="oglas">
+                <h2 class="oglas-naslov"><%= oglas.title %></h2>
+                <p><%= oglas.description %></p>
+                <div class="cena">
+                    <p>Cena: <%= oglas.price %></p>
+                </div>
+            </div>
+        <% }) %>
+    <%}; %>
+</body>
+</html>

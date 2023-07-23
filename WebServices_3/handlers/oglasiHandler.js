@@ -111,3 +111,33 @@ exports.izbrisiOglas = async (req, res) => {
         });
     }
 };
+
+//* Kreiranje na nov oglas so ime na user
+exports.kreirajMojOglas = async (req, res) => {
+    try{
+        const postirajOglas = await Movie.create({
+            category: req.body.category,
+            title: req.body.title,
+            description: req.body.description,
+            price: req.body.price,
+            author: req.auth.id
+        });
+        res.status(201).json(postirajOglas);
+    }
+    catch(err) {
+        res.status(500).json({ error: err });
+    }
+};
+
+//* Prikazuvanje na site oglasi so ime na user
+exports.siteMoiOglasi = async (req, res) => {
+    try{
+        const userId = req.auth.id;
+        const moiOglasi = await Movie.find({author: userId}).populate("author");
+
+        res.status(201).json(moiOglasi);
+    }
+    catch(err) {
+        res.status(500).json({ error: err});
+    }
+};
