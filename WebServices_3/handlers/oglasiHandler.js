@@ -113,7 +113,7 @@ exports.izbrisiOglas = async (req, res) => {
 };
 
 //* Kreiranje na nov oglas so ime na user
-exports.kreirajMojOglas = async (req, res) => {
+exports.kreirajMojOglas = async (req, res, next) => {
     try{
         const postirajOglas = await Movie.create({
             category: req.body.category,

@@ -1,16 +1,12 @@
 h1 {
-    color: rgb(187, 187, 221);
-}
-
-.oglas-naslov {
-    color: rgb(210, 163, 255);
+    color: rgb(178, 64, 191);
 }
 
 .cena {
-    color: rgb(249, 120, 120);
+    color: rgb(150, 73, 188);
 }
 
 .oglas {
-    background-color: rgb(224, 253, 255);
-    border: 5px rgb(201, 211, 232);
+    background-color: rgb(242, 212, 255);
+    border: 10px rgb(72, 72, 72);
 }

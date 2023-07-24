@@ -9,7 +9,7 @@ const login = async (email, password) => {
                 password,
             }
         })
-        window.location.href = "/viewOglasi";
+        window.location.href = "/siteoglasi";
     }
     catch(err) {
         console.log(err);
