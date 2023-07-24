@@ -31,6 +31,7 @@ exports.pregledOglasi = async (req, res) => {
 //* Kreiranje na nov oglas
 exports.kreiranjeOglas = async (req, res) => {
     try{
+        console.log(req.auth);
         await Oglas.create(req.body);
         res.redirect("/siteoglasi");
     }

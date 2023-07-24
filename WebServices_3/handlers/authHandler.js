@@ -58,6 +58,15 @@ exports.logIn = async (req, res) => {
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES});
 
+         // 5. go isprakjame cookisot so tokenot
+        res.cookie("jwt", token, {
+        expires: new Date(
+          Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+        ),
+        secure: false,
+        httpOnly: true,
+        });
+
         //* Na kraj go isprakjame tokenot
         res.status(201).json({
             status: "success",

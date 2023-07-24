@@ -29,6 +29,7 @@ app.set("view engine", "ejs"); //app da koristi ejs
 app.use(express.json()); //persiranje na podatoci
 app.use(express.urlencoded({extended: true})); //od front gi isprakjame podatocite, se persiraat i prakjaat do serverot
 app.use(express.static("public"));
+app.use(cookieParser());
 
 //* Izvrsuvanje na f-ja so koja se konektirame so database
 db.init();
@@ -36,22 +37,21 @@ db.init();
 app.use(jwt.expressjwt({
     algorithms: ["HS256"],
     secret: process.env.JWT_SECRET,
-
     getToken: (req) => {
-        if (
-          req.headers.authorization &&
-          req.headers.authorization.split(" ")[0] === "Bearer"
-        ) {
-          return req.headers.authorization.split(" ")[1];
-        }
-        if (req.cookies.jwt) {
-          return req.cookies.jwt;
-        }
-        return null; // vo slucaj ako nemame isprateno token
-      },
+      if (
+        req.headers.authorization &&
+        req.headers.authorization.split(" ")[0] === "Bearer"
+      ) {
+        return req.headers.authorization.split(" ")[1];
+      }
+      if (req.cookies.jwt) {
+        return req.cookies.jwt;
+      }
+      return null; // vo slucaj ako nemame isprateno token
+    },
     })
     .unless({
-        path: ["/api/v1/signup", "/api/v1/login", "/api/oglasi", "/login" , "/siteoglasi"]
+        path: ["/api/v1/signup", "/api/v1/login", "/api/oglasi", "/login"]
     })
 );
 

@@ -1,7 +1,7 @@
 //* Koristenje na axios
 const login = async (email, password) => {
     try {
-        await axios({
+        const res = await axios({
             method: "POST",
             url: "/api/v1/login",
             data: {
@@ -9,7 +9,9 @@ const login = async (email, password) => {
                 password,
             }
         })
+        console.log(res);
         window.location.href = "/siteoglasi";
+        
     }
     catch(err) {
         console.log(err);
