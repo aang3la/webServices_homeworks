@@ -5,7 +5,7 @@ const app = express();
 
 app.get("/api/v1/rickandmortyapi/character/:id", rickandmortyapi.getCharacter);
 app.get("/api/v1/rickandmortyapi/episode/:episodeId", rickandmortyapi.getEpisode);
-app.get("/api/v1/rickandmortyapi/episode/:locationId", rickandmortyapi.getLocation);
+app.get("/api/v1/rickandmortyapi/location/:locationId", rickandmortyapi.getLocation);
 
 app.listen(10000, (err) => {
     if(err){
