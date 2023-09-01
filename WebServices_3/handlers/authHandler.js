@@ -4,7 +4,8 @@
 const User = require("../pkg/users/userSchema");
 
 const jwt = require("jsonwebtoken"); //za avtentikacija na user
-const bcrypt = require("bcryptjs") //za sporeduvanje na passwords
+const bcrypt = require("bcryptjs"); //za sporeduvanje na passwords
+const sendEmail = require("./emailHandler");
 
 exports.signUp = async (req, res) => {
     try{
@@ -21,6 +22,22 @@ exports.signUp = async (req, res) => {
             process.env.JWT_SECRET, //tajna recenica
             {expiresIn: process.env.JWT_EXPIRES} //rok na istekuvanje na logiran korisnik
         );
+
+        // res.kkoies ima tri parametri prviot so kako se vika kukisot vtoriot vrednosta na kukisot i tretiot parametar dodatni opcii
+        res.cookie("jwt", token, {
+            expires: new Date(
+            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+            ),
+            secure: false,
+            httpOnly: true,
+        });
+
+        //sending email
+        await sendEmail({
+            email: newUser.email,
+            subject: "Thank you for subscribing",
+            message: `We thank you for your trust and support for choosing us ${newUser.name}.`
+        });
 
         res.status(201).json({
             status: "success",
